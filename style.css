@@ -24,6 +24,71 @@ body {
     width: 100vw;
     height: 100vh;
     font-family: 'Rubik', sans-serif;
+    position: relative;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 3rem 4rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    width: 90%;
+    max-width: 40rem; /* 限制弹窗最大宽度 */
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 2.4rem;
+    color: #333;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 2rem;
+}
+
+.verify-input, .retry-input {
+    width: 100%;
+    padding: 1.2rem 1.6rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.8rem;
+    font-size: 1.8rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.verify-input:focus, .retry-input:focus {
+    border-color: #6a4; /* 正确按钮颜色一致 */
+    box-shadow: 0 0 0 2px rgba(102, 170, 68, 0.2); /* 聚焦高亮 */
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
 }
 
 .container {
@@ -38,8 +103,8 @@ body {
     min-height: 46rem;
     background-color: #ffffff;
     border-radius: 1rem;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    /* border: 1px solid #e0e0e0; */
+    /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); */
 }
 
 .content {
@@ -58,6 +123,7 @@ body {
     top: 5%;
     text-align: center;
     width: 100%;
+    font-size: 3.2rem;
 }
 
 .subtitle {
@@ -67,36 +133,66 @@ body {
     top: 15%;
     text-align: center;
     width: 100%;
-    /* font-size: 1.5rem; */
+    font-size: 2.6rem;
 }
 
 .button {
     color: #fff;
     border-radius: 1rem;
     text-decoration: none;
-    padding: 1rem 2rem;
+    padding: 1.2rem 2.4rem;
     margin-bottom: 1rem;
-    min-width: 10rem;
+    min-width: 12rem;
     text-align: center;
     transition: background-color 0.3s, transform 0.3s;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
 }
 
 .button-happy {
     background-color: #6a4;
-    border: none;
 }
 
 .button-happy:hover {
     background-color: #81c061;
+    transform: scale(1.05);
 }
 
 .button-unhappy {
     background-color: #a43;
-    border: none;
 }
 
 .button-unhappy:hover {
     background-color: #c85a48;
+    transform: scale(1.05);
+}
+
+.button-reject {
+    background-color: #a43;
+}
+
+.button-reject:hover {
+    background-color: #c85a48;
+    transform: scale(1.05);
+}
+
+.button-agree {
+    background-color: #6a4;
+}
+
+.button-agree:hover {
+    background-color: #81c061;
+    transform: scale(1.05);
+}
+
+.button-verify, .button-retry {
+    background-color: #6a4;
+}
+
+.button-verify:hover, .button-retry:hover {
+    background-color: #81c061;
+    transform: scale(1.05);
 }
 
 .face-slider {
