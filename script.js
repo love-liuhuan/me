@@ -15,6 +15,9 @@ const nameRetryModal = document.getElementById('nameRetryModal');
 const retryInput = document.querySelector('.retry-input');
 const retryBtn = document.querySelector('.button-retry');
 
+// 新增：获取所有返回首页按钮
+const backButtons = document.querySelectorAll('.button-back');
+
 const config = {
     maxUnhappyCount: 1,
     animationSpeed: 0.1,
@@ -111,6 +114,16 @@ function hideModal() {
 
 function goToNewPage() {
     window.location.href = config.newPageUrl;
+}
+
+function goToHomePage() {
+    // 关闭所有弹窗 + 重置页面状态
+    hideModal();
+    state.rejectCount = 0;
+    transitionToState('normal');
+    startAnimation();
+    // 若首页是当前页面（index.html），直接重置即可；若首页是其他页面，替换为对应URL
+    window.location.href = 'index.html';
 }
 
 function handleVerifySubmit() {
@@ -222,6 +235,10 @@ verifyInput.addEventListener('keydown', (e) => {
 
 retryInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') handleRetrySubmit();
+});
+
+backButtons.forEach(button => {
+    button.addEventListener('click', goToHomePage);
 });
 
 startAnimation();
