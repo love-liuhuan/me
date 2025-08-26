@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在一起啦！</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      color: #333;
+    }
+
+    .celebrate-title {
+      font-size: 4rem;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .celebrate-desc {
+      font-size: 2rem;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .heart {
+      width: 15rem;
+      height: 15rem;
+      background-color: #ff4466;
+      transform: rotate(45deg);
+      position: relative;
+      animation: heartBeat 1.5s infinite alternate;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 15rem;
+      height: 15rem;
+      background-color: #ff4466;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -7.5rem;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: -7.5rem;
+    }
+
+    @keyframes heartBeat {
+      0% {
+        transform: rotate(45deg) scale(1);
+      }
+
+      100% {
+        transform: rotate(45deg) scale(1.2);
+      }
+    }
+
+    .back-button {
+      background-color: #6a4;
+      color: #fff;
+      border: none;
+      padding: 1.2rem 2.4rem;
+      border-radius: 1rem;
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #81c061;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="celebrate-title">刘欢，我们在一起吧！</h1>
+  <div class="heart"></div>
+  <p class="celebrate-desc">往后的日子，一起看星星、一起吃好吃的～</p>
+  <button class="back-button" onclick="window.location.href='index.html'">返回表白页</button>
+</body>
+
+</html>
