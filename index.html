@@ -4,16 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>变脸</title>
+  <title>love</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <section class="container">
     <div class="content">
       <h1 class="title">刘欢</h1>
-      <!-- <h2 class="subtitle">希望不要卸载</h2> -->
       <h1 class="subtitle">你愿意做我女朋友吗</h1>
       <figure class="face-slider">
         <div class="face-slider-blush face-slider-blush-left"></div>
@@ -26,7 +26,37 @@
       <button class="button button-unhappy">不愿意</button>
     </div>
   </section>
+
+  <div class="modal" id="begModal" style="display: none;">
+    <div class="modal-content">
+      <h2 class="modal-title">好不好嘛</h2>
+      <div class="modal-buttons">
+        <button class="button button-reject">拒绝</button>
+        <button class="button button-agree">答应他</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="nameVerifyModal" style="display: none;">
+    <div class="modal-content">
+      <h2 class="modal-title">恋爱小考试</h2>
+      <input type="text" class="verify-input" placeholder="我的名字" autocomplete="off">
+      <div class="modal-buttons">
+        <button class="button button-verify">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="nameRetryModal" style="display: none;">
+    <div class="modal-content">
+      <h2 class="modal-title">再给宝贝一次机会</h2>
+      <input type="text" class="retry-input" placeholder="名字不对哦，再试试" autocomplete="off">
+      <div class="modal-buttons">
+        <button class="button button-retry">确定</button>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
-
 </html>
