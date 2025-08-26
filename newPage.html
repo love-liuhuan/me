@@ -1,105 +1,563 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>立刻有</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Rubik', sans-serif;
-    }
+    <meta charset="utf-8" />
+    <title>立刻有</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link type="text/css" href="./xc/style1.css" rel="stylesheet" />
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
 
-    body {
-      width: 100vw;
-      height: 100vh;
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 3rem;
-      color: #333;
-    }
+.back-home-btn {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    /* 核心：flex 垂直+水平居中 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    padding: 0;
+}
 
-    .celebrate-title {
-      font-size: 4rem;
-      text-align: center;
-      padding: 0 2rem;
-    }
+.back-home-btn span {
+    color: #fff;
+    font-size: 14px;
+    margin: 0; 
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    /* 关键：让文字在爱心正中间，根据实际爱心大小微调数值 */
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%);
+}
 
-    .celebrate-desc {
-      font-size: 2rem;
-      text-align: center;
-      padding: 0 2rem;
-    }
+.back-home-btn:hover svg {
+    fill: #ff4757;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
 
-    .heart {
-      width: 15rem;
-      height: 15rem;
-      background-color: #ff4466;
-      transform: rotate(45deg);
-      position: relative;
-      animation: heartBeat 1.5s infinite alternate;
-    }
+        .container {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
 
-    .heart::before,
-    .heart::after {
-      content: '';
-      width: 15rem;
-      height: 15rem;
-      background-color: #ff4466;
-      border-radius: 50%;
-      position: absolute;
-    }
-
-    .heart::before {
-      top: -7.5rem;
-      left: 0;
-    }
-
-    .heart::after {
-      top: 0;
-      left: -7.5rem;
-    }
-
-    @keyframes heartBeat {
-      0% {
-        transform: rotate(45deg) scale(1);
-      }
-
-      100% {
-        transform: rotate(45deg) scale(1.2);
-      }
-    }
-
-    .back-button {
-      background-color: #6a4;
-      color: #fff;
-      border: none;
-      padding: 1.2rem 2.4rem;
-      border-radius: 1rem;
-      font-size: 1.8rem;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .back-button:hover {
-      background-color: #81c061;
-      transform: scale(1.05);
-    }
-  </style>
+        /* 新增表白字幕样式 */
+        .love-subtitle {
+            position: fixed; /* 固定在页面中，不随滚动移动 */
+            top: 20%; /* 距离顶部10%位置，可调整 */
+            left: 50%;
+            transform: translateX(-50%); /* 水平居中 */
+            z-index: 9999; /* 层级最高，确保在3D相册和樱花之上 */
+            font-family: "Microsoft YaHei", sans-serif; /* 优美字体 */
+            font-size: 28px; /* 字体大小，可调整 */
+            color: #ff6b81; /* 粉色系，符合表白氛围 */
+            text-shadow: 0 0 10px rgba(255, 107, 129, 0.8); /* 文字发光效果 */
+            opacity: 0; /* 默认隐藏 */
+            transition: opacity 0.8s ease; /* 渐显渐隐过渡 */
+            white-space: nowrap; /* 防止文字换行 */
+        }
+    </style>
 </head>
-
 <body>
-  <h1 class="celebrate-title">刘欢，我们在一起吧！</h1>
-  <div class="heart"></div>
-  <p class="celebrate-desc">往后的日子，一起看星星、一起吃好吃的～</p>
-  <button class="back-button" onclick="window.location.href='index.html'">返回表白页</button>
-</body>
+    <!-- 新增表白字幕容器 -->
+    <div class="love-subtitle" id="loveSubtitle"></div>
 
+    <div class="m-main">
+		<div class="player">
+			<a href="javascript:void(0)" rel="external nofollow" rel="external nofollow" id="js-play">
+				<img src="./img-one/开始.png" alt="播放按钮" id="img1"/>
+            </a>
+			<a href="javascript:void(0)" rel="external nofollow" rel="external nofollow" id="js-pause">
+				<img src="./img-one/暂停.png" alt="暂停按钮" id="img2"/>
+			</a>
+			<div class="play-box">
+				<div class="left">
+					<p class="timeline"><span style=""></span></p>
+					<div class="info">
+						<span class="size">00:00</span>
+						<span class="timeshow">00:00</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="video">
+			<audio controls autoplay name="media" id="js-video">
+  <source src="./mp3/forya.mp3" type="audio/mpeg">
+</audio>
+		</div>
+	</div>
+    <div id="jsi-cherry-container" class="container">
+        <div class="box">
+            <ul class="minbox">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <ol class="maxbox">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ol>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            AudioControl('js-video');
+
+            function AudioControl(id) {
+                // 音频控制进度条
+                var audio = document.getElementById(id);
+                $(audio).on('loadedmetadata', function () {
+                    audio.pause();
+                    // 进度条控制
+                    $(document).on('touchend', '.timeline', function (e) {
+                        var x = e.originalEvent.changedTouches[0].clientX - this.offsetLeft;
+                        var X = x < 0 ? 0 : x;
+                        var W = $(this).width();
+                        var place = X > W ? W : X;
+                        audio.currentTime = (place / W).toFixed(2) * audio.duration;
+                        $(this).children().css({
+                            width: (place / W).toFixed(2) * 100 + "%"
+                        })
+                    });
+                    // 播放
+                    $(document).on('click', '#js-play', function () {
+                        audio.play()
+                        $('#img1').css("display","none");
+                        $('#img2').css("display","block");
+                    });
+                    // 暂停
+                    $(document).on('click', '#js-pause', function () {
+                        audio.pause()
+                        $('#img1').css("display","block");
+                        $('#img2').css("display","none");
+                    });
+                });
+                setInterval(function () {
+                    var currentTime = audio.currentTime;
+                    setTimeShow(currentTime);
+                }, 1000);
+                // 设置播放时间
+                function setTimeShow(t) {
+                    t = Math.floor(t);
+                    var playTime = secondToMin(audio.currentTime);
+                    $(".size").html(playTime);
+                    $('.timeshow').text(secondToMin(audio.duration));
+                    $('.timeline').children().css({
+                        width: (t / audio.duration).toFixed(4) * 100 + "%"
+                    })
+                }
+                // 计算时间
+                function secondToMin(s) {
+                    var MM = Math.floor(s / 60);
+                    var SS = s % 60;
+                    if (MM < 10)
+                        MM = "0" + MM;
+                    if (SS < 10)
+                        SS = "0" + SS;
+                    var min = MM + ":" + SS;
+                    return min.split('.')[0];
+                }
+            }
+        })
+        var RENDERER = {
+            INIT_CHERRY_BLOSSOM_COUNT: 30,
+            MAX_ADDING_INTERVAL: 10,
+
+            init: function () {
+                this.setParameters();
+                this.reconstructMethods();
+                this.createCherries();
+                this.render();
+                if (
+                    navigator.userAgent.match(
+                        /(phone|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+                    )
+                ) {
+                    var box = document.querySelectorAll('.box')[0];
+                    box.style.marginTop = '65%';
+                }
+            },
+            setParameters: function () {
+                this.$container = $('#jsi-cherry-container');
+                this.width = this.$container.width();
+                this.height = this.$container.height();
+                this.context = $('<canvas />')
+                    .attr({
+                        width: this.width,
+                        height: this.height
+                    })
+                    .appendTo(this.$container)
+                    .get(0)
+                    .getContext('2d');
+                this.cherries = [];
+                this.maxAddingInterval = Math.round(
+                    (this.MAX_ADDING_INTERVAL * 1000) / this.width
+                );
+                this.addingInterval = this.maxAddingInterval;
+            },
+            reconstructMethods: function () {
+                this.render = this.render.bind(this);
+            },
+            createCherries: function () {
+                for (
+                    var i = 0,
+                        length = Math.round(
+                            (this.INIT_CHERRY_BLOSSOM_COUNT * this.width) / 1000
+                        ); i < length; i++
+                ) {
+                    this.cherries.push(new CHERRY_BLOSSOM(this, true));
+                }
+            },
+            render: function () {
+                requestAnimationFrame(this.render);
+                this.context.clearRect(0, 0, this.width, this.height);
+
+                this.cherries.sort(function (cherry1, cherry2) {
+                    return cherry1.z - cherry2.z;
+                });
+                for (var i = this.cherries.length - 1; i >= 0; i--) {
+                    if (!this.cherries[i].render(this.context)) {
+                        this.cherries.splice(i, 1);
+                    }
+                }
+                if (--this.addingInterval == 0) {
+                    this.addingInterval = this.maxAddingInterval;
+                    this.cherries.push(new CHERRY_BLOSSOM(this, false));
+                }
+            }
+        };
+        var CHERRY_BLOSSOM = function (renderer, isRandom) {
+            this.renderer = renderer;
+            this.init(isRandom);
+        };
+        CHERRY_BLOSSOM.prototype = {
+            FOCUS_POSITION: 300,
+            FAR_LIMIT: 600,
+            MAX_RIPPLE_COUNT: 100,
+            RIPPLE_RADIUS: 100,
+            SURFACE_RATE: 0.5,
+            SINK_OFFSET: 20,
+
+            init: function (isRandom) {
+                this.x = this.getRandomValue(
+                    -this.renderer.width,
+                    this.renderer.width
+                );
+                this.y = isRandom ?
+                    this.getRandomValue(0, this.renderer.height) :
+                    this.renderer.height * 1.5;
+                this.z = this.getRandomValue(0, this.FAR_LIMIT);
+                this.vx = this.getRandomValue(-2, 2);
+                this.vy = -2;
+                this.theta = this.getRandomValue(0, Math.PI * 2);
+                this.phi = this.getRandomValue(0, Math.PI * 2);
+                this.psi = 0;
+                this.dpsi = this.getRandomValue(Math.PI / 600, Math.PI / 300);
+                this.opacity = 0;
+                this.endTheta = false;
+                this.endPhi = false;
+                this.rippleCount = 0;
+
+                var axis = this.getAxis(),
+                    theta =
+                    this.theta +
+                    (Math.ceil(
+                            -(this.y + this.renderer.height * this.SURFACE_RATE) / this.vy
+                        ) *
+                        Math.PI) /
+                    500;
+                theta %= Math.PI * 2;
+
+                this.offsetY =
+                    40 * (theta <= Math.PI / 2 || theta >= (Math.PI * 3) / 2 ? -1 : 1);
+                this.thresholdY =
+                    this.renderer.height / 2 +
+                    this.renderer.height * this.SURFACE_RATE * axis.rate;
+                this.entityColor = this.renderer.context.createRadialGradient(
+                    0,
+                    40,
+                    0,
+                    0,
+                    40,
+                    80
+                );
+                this.entityColor.addColorStop(
+                    0,
+                    'hsl(330, 70%, ' + 50 * (0.3 + axis.rate) + '%)'
+                );
+                this.entityColor.addColorStop(
+                    0.05,
+                    'hsl(330, 40%,' + 55 * (0.3 + axis.rate) + '%)'
+                );
+                this.entityColor.addColorStop(
+                    1,
+                    'hsl(330, 20%, ' + 70 * (0.3 + axis.rate) + '%)'
+                );
+                this.shadowColor = this.renderer.context.createRadialGradient(
+                    0,
+                    40,
+                    0,
+                    0,
+                    40,
+                    80
+                );
+                this.shadowColor.addColorStop(
+                    0,
+                    'hsl(330, 40%, ' + 30 * (0.3 + axis.rate) + '%)'
+                );
+                this.shadowColor.addColorStop(
+                    0.05,
+                    'hsl(330, 40%,' + 30 * (0.3 + axis.rate) + '%)'
+                );
+                this.shadowColor.addColorStop(
+                    1,
+                    'hsl(330, 20%, ' + 40 * (0.3 + axis.rate) + '%)'
+                );
+            },
+            getRandomValue: function (min, max) {
+                return min + (max - min) * Math.random();
+            },
+            getAxis: function () {
+                var rate = this.FOCUS_POSITION / (this.z + this.FOCUS_POSITION),
+                    x = this.renderer.width / 2 + this.x * rate,
+                    y = this.renderer.height / 2 - this.y * rate;
+                return {
+                    rate: rate,
+                    x: x,
+                    y: y
+                };
+            },
+            renderCherry: function (context, axis) {
+                context.beginPath();
+                context.moveTo(0, 40);
+                context.bezierCurveTo(-60, 20, -10, -60, 0, -20);
+                context.bezierCurveTo(10, -60, 60, 20, 0, 40);
+                context.fill();
+
+                for (var i = -4; i < 4; i++) {
+                    context.beginPath();
+                    context.moveTo(0, 40);
+                    context.quadraticCurveTo(i * 12, 10, i * 4, -24 + Math.abs(i) * 2);
+                    context.stroke();
+                }
+            },
+            render: function (context) {
+                var axis = this.getAxis();
+
+                if (
+                    axis.y == this.thresholdY &&
+                    this.rippleCount < this.MAX_RIPPLE_COUNT
+                ) {
+                    context.save();
+                    context.lineWidth = 2;
+                    context.strokeStyle =
+                        'hsla(0, 0%, 100%, ' +
+                        (this.MAX_RIPPLE_COUNT - this.rippleCount) /
+                        this.MAX_RIPPLE_COUNT +
+                        ')';
+                    context.translate(
+                        axis.x +
+                        this.offsetY * axis.rate * (this.theta <= Math.PI ? -1 : 1),
+                        axis.y
+                    );
+                    context.scale(1, 0.3);
+                    context.beginPath();
+                    context.arc(
+                        0,
+                        0,
+                        (this.rippleCount / this.MAX_RIPPLE_COUNT) *
+                        this.RIPPLE_RADIUS *
+                        axis.rate,
+                        0,
+                        Math.PI * 2,
+                        false
+                    );
+                    context.stroke();
+                    context.restore();
+                    this.rippleCount++;
+                }
+                if (axis.y < this.thresholdY || !this.endTheta || !this.endPhi) {
+                    if (this.y <= 0) {
+                        this.opacity = Math.min(this.opacity + 0.01, 1);
+                    }
+                    context.save();
+                    context.globalAlpha = this.opacity;
+                    context.fillStyle = this.shadowColor;
+                    context.strokeStyle =
+                        'hsl(330, 30%,' + 40 * (0.3 + axis.rate) + '%)';
+                    context.translate(
+                        axis.x,
+                        Math.max(axis.y, this.thresholdY + this.thresholdY - axis.y)
+                    );
+                    context.rotate(Math.PI - this.theta);
+                    context.scale(axis.rate * -Math.sin(this.phi), axis.rate);
+                    context.translate(0, this.offsetY);
+                    this.renderCherry(context, axis);
+                    context.restore();
+                }
+                context.save();
+                context.fillStyle = this.entityColor;
+                context.strokeStyle = 'hsl(330, 40%,' + 70 * (0.3 + axis.rate) + '%)';
+                context.translate(
+                    axis.x,
+                    axis.y + Math.abs(this.SINK_OFFSET * Math.sin(this.psi) * axis.rate)
+                );
+                context.rotate(this.theta);
+                context.scale(axis.rate * Math.sin(this.phi), axis.rate);
+                context.translate(0, this.offsetY);
+                this.renderCherry(context, axis);
+                context.restore();
+
+                if (this.y <= -this.renderer.height / 4) {
+                    if (!this.endTheta) {
+                        for (
+                            var theta = Math.PI / 2, end = (Math.PI * 3) / 2; theta <= end; theta += Math.PI
+                        ) {
+                            if (this.theta < theta && this.theta + Math.PI / 200 > theta) {
+                                this.theta = theta;
+                                this.endTheta = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!this.endPhi) {
+                        for (
+                            var phi = Math.PI / 8, end = (Math.PI * 7) / 8; phi <= end; phi += (Math.PI * 3) / 4
+                        ) {
+                            if (this.phi < phi && this.phi + Math.PI / 200 > phi) {
+                                this.phi = Math.PI / 8;
+                                this.endPhi = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (!this.endTheta) {
+                    if (axis.y == this.thresholdY) {
+                        this.theta +=
+                            (Math.PI / 200) *
+                            (this.theta < Math.PI / 2 ||
+                                (this.theta >= Math.PI && this.theta < (Math.PI * 3) / 2) ?
+                                1 :
+                                -1);
+                    } else {
+                        this.theta += Math.PI / 500;
+                    }
+                    this.theta %= Math.PI * 2;
+                }
+                if (this.endPhi) {
+                    if (this.rippleCount == this.MAX_RIPPLE_COUNT) {
+                        this.psi += this.dpsi;
+                        this.psi %= Math.PI * 2;
+                    }
+                } else {
+                    this.phi += Math.PI / (axis.y == this.thresholdY ? 200 : 500);
+                    this.phi %= Math.PI;
+                }
+                if (this.y <= -this.renderer.height * this.SURFACE_RATE) {
+                    this.x += 2;
+                    this.y = -this.renderer.height * this.SURFACE_RATE;
+                } else {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                }
+                return (
+                    this.z > -this.FOCUS_POSITION &&
+                    this.z < this.FAR_LIMIT &&
+                    this.x < this.renderer.width * 1.5
+                );
+            }
+        };
+        $(function () {
+            console.log(6666);
+            RENDERER.init();
+
+            // 自动触发相册展开/收起效果，每6秒一次
+            const box = document.querySelector('.box');
+            let isExpanded = false;
+
+            setInterval(() => {
+                if (!isExpanded) {
+                    // 展开相册
+                    box.classList.add('active');
+                    // 保持展开状态2秒后收起
+                    setTimeout(() => {
+                        box.classList.remove('active');
+                        isExpanded = false;
+                    }, 3000);
+                }
+                isExpanded = true;
+            }, 6000);
+
+            /* 新增表白字幕控制逻辑 */
+            // 1. 定义表白文案数组（可自行修改、增删句子）
+            const loveTexts = [
+                "第一次见到你，我就心动了",
+                "你的笑容，像阳光一样温暖",
+                "和你在一起的每一刻，都很开心",
+                "我想陪你走过春夏秋冬",
+                "往后余生，风雪是你，平淡是你",
+                "你愿意做我生命中最重要的人吗？"
+            ];
+            const subtitleEl = document.getElementById('loveSubtitle');
+            let currentIndex = 0; // 当前显示的句子索引
+            const showDuration = 3000; // 每句显示时间（毫秒，3000=3秒）
+            const fadeDuration = 800; // 渐隐过渡时间（需与CSS transition一致）
+
+            // 2. 显示下一句的函数
+            function showNextText() {
+                // 切换到下一句（循环）
+                currentIndex = (currentIndex + 1) % loveTexts.length;
+                // 设置文字内容并显示
+                subtitleEl.textContent = loveTexts[currentIndex];
+                subtitleEl.style.opacity = 1;
+
+                // 3秒后开始渐隐
+                setTimeout(() => {
+                    subtitleEl.style.opacity = 0;
+                    // 渐隐结束后，延迟0.2秒再显示下一句（避免衔接过快）
+                    setTimeout(showNextText, fadeDuration + 200);
+                }, showDuration);
+            }
+
+            // 3. 页面加载完成后，先延迟1秒显示第一句（给3D相册加载时间）
+            setTimeout(showNextText, 1000);
+
+            const backHomeBtn = document.getElementById('backHomeBtn');
+            backHomeBtn.addEventListener('click', function () {
+            window.location.href = 'index.html'; // 跳转至首页
+    });
+        });
+    </script>
+    <!-- SVG 爱心按钮 -->
+<button class="back-home-btn" id="backHomeBtn">
+    <svg width="120" height="110" viewBox="0 0 24 24" fill="#ff6b81">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+    <span>返回</span>
+</button>
+</body>
 </html>
