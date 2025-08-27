@@ -15,39 +15,64 @@
             overflow: hidden;
         }
 
-.back-home-btn {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    /* 核心：flex 垂直+水平居中 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; 
-    padding: 0;
-}
+        .back-home-btn {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
+            padding: 0;
+        }
 
-.back-home-btn span {
-    color: #fff;
-    font-size: 14px;
-    margin: 0; 
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    /* 关键：让文字在爱心正中间，根据实际爱心大小微调数值 */
-    position: absolute; 
-    top: 50%;
-    transform: translateY(-50%);
-}
+        .back-home-btn span {
+            color: #fff;
+            font-size: 24px;
+            margin: 0; 
+            text-shadow: 0 0 10px rgba(255, 107, 129, 0.8), 0 2px 4px rgba(0,0,0,0.3);
+            position: absolute; 
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
-.back-home-btn:hover svg {
-    fill: #ff4757;
-    transform: scale(1.1);
-    transition: all 0.3s ease;
-}
+        .back-home-btn:hover svg {
+            fill: #ff4757;
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+
+        /* 爱心闪烁发光效果 */
+        .pulse-heart {
+            /* 基础发光效果 */
+            filter: drop-shadow(0 0 10px rgba(255, 107, 129, 0.8));
+            /* 闪烁动画 */
+            animation: pulse-glow 2s infinite alternate;
+        }
+
+        /* 定义闪烁动画 */
+        @keyframes pulse-glow {
+            0% {
+                /* 较弱的发光 */
+                filter: drop-shadow(0 0 5px rgba(255, 107, 129, 0.3));
+                fill: #ff6b81;
+            }
+            50% {
+                /* 中等强度发光 */
+                filter: drop-shadow(0 0 15px rgba(255, 107, 129, 0.8));
+                fill: #ff5267;
+            }
+            100% {
+                /* 最强的发光 */
+                filter: drop-shadow(0 0 45px rgba(255, 107, 129, 1));
+                fill: #ff384f;
+            }
+        }
 
         .container {
             width: 100%;
@@ -512,19 +537,62 @@
                 isExpanded = true;
             }, 6000);
 
-            /* 新增表白字幕控制逻辑 */
+            /* 显示的字幕 */
             // 1. 定义表白文案数组（可自行修改、增删句子）
             const loveTexts = [
-                "第一次见到你，我就心动了",
-                "你的笑容，像阳光一样温暖",
-                "和你在一起的每一刻，都很开心",
-                "我想陪你走过春夏秋冬",
-                "往后余生，风雪是你，平淡是你",
-                "你愿意做我生命中最重要的人吗？"
+                "在soul动态上见到你的时候，觉得好可爱！",
+                "想着去聊聊看吧！",
+                "于是我就发起了私信，还做了自我介绍",
+                "介绍的还像相亲一样，没想到你还回复了",
+                "然后就有点小激动，哈哈😄",
+                "没想到你不嫌弃我，这时候我很开心",
+                "接着，我们就加微信了",
+                "微信里，你说自己是一个大大咧咧的女孩子",
+                "可是这样的性子我很喜欢",
+                "在我说出自己的不自信时，你还会鼓励我",
+                "妈呀，突然感觉你与别的女生好不一样",
+                "我开始有点喜欢了",
+                "有时候聊着聊着你就不在线了",
+                "上班的时候，我总会打开手机",
+                "看看有没有你的回复",
+                "下班后走在路上,也会一直打开聊天对话框等你",
+                "一边走一边等一边想",
+                "这时候我就多想了",
+                "是不是觉得我很烦",
+                "是不是我不太会聊天",
+                "是不是犯了什么错误",
+                "会不会被拉黑了[裂开]",
+                "后面得知，原来上班去了",
+                "你说是我太敏感了",
+                "哈哈，也是哦",
+                "你说我这个人不怎么开玩笑",
+                "你说自己可以接受不太大的玩笑",
+                "但是在刚认识的时候，我觉得还不够了解",
+                "所以不敢随便开玩笑",
+                "我觉得也是一种尊重吧",
+                "可是，我提出想见面的时候",
+                "你拒绝了，说要双方要先有一定的了解才能见面",
+                "但是，我尊重你的决定",
+                "因为正常来说，不太熟悉",
+                "见面确实没有安全感",
+                "就算很想见你，我也会适当的克制",
+                "但是，我还是想早日见见手机对面的那个她",
+                "前提是，还是要一定的了解",
+                "我这个人不太懂浪漫，但是我会一点一点学",
+                "作为一名计算机专业的学生",
+                "我也要给出相应的仪式感",
+                "这个网页的制作耗时3天",
+                "小部分效果动画，来源网络，不要介意哈",
+                "小文案是我一个字一个字想，一个字一个字的打上去的",
+                "哪怕你只有一瞬间感到开心、惊喜",
+                "我也觉得是值得的",
+                "最后，在这个特别的日子——七夕！",
+                "祝刘欢妹妹,七夕节快乐！"
+
             ];
             const subtitleEl = document.getElementById('loveSubtitle');
             let currentIndex = 0; // 当前显示的句子索引
-            const showDuration = 3000; // 每句显示时间（毫秒，3000=3秒）
+            const showDuration = 3500; // 每句显示时间（毫秒，3000=3秒）
             const fadeDuration = 800; // 渐隐过渡时间（需与CSS transition一致）
 
             // 2. 显示下一句的函数
@@ -553,11 +621,11 @@
         });
     </script>
     <!-- SVG 爱心按钮 -->
-<button class="back-home-btn" id="backHomeBtn">
-    <svg width="120" height="110" viewBox="0 0 24 24" fill="#ff6b81">
-        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-    </svg>
-    <span>返回</span>
-</button>
+    <button class="back-home-btn" id="backHomeBtn">
+        <svg class="pulse-heart" width="200" height="190" viewBox="0 0 24 24" fill="#ff6b81">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <span>返回</span>
+    </button>
 </body>
 </html>
