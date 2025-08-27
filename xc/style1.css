@@ -296,112 +296,112 @@ li {
 
 /* 鼠标悬停效果（展开尺寸200x200） */
 .box:hover ol li:nth-child(1) {
-    -webkit-transform: translateZ(200px);
-    width: 200px;  /* 展开后宽度200px */
-    height: 200px; /* 展开后高度200px */
+    -webkit-transform: translateZ(300px);
+    width: 400px;
+    height: 400px;
     opacity: 0.8;
-    left: 0px;    /* 位置偏移调整 */
-    top: 0px;     /* 位置偏移调整 */
+    left: -100px;
+    top: -100px;
 }
 
 .box:hover ol li:nth-child(2) {
-    -webkit-transform: rotateX(180deg) translateZ(200px);
-    width: 200px;
-    height: 200px;
+    -webkit-transform: rotateX(180deg) translateZ(300px);
+    width: 400px;
+    height: 400px;
     opacity: 0.8;
-    left: 0px;
-    top: 0px;
+    left: -100px;
+    top: -100px;
 }
 
 .box:hover ol li:nth-child(3) {
-    -webkit-transform: rotateX(-90deg) translateZ(200px);
-    width: 200px;
-    height: 200px;
+    -webkit-transform: rotateX(-90deg) translateZ(300px);
+    width: 400px;
+    height: 400px;
     opacity: 0.8;
-    left: 0px;
-    top: 0px;
+    left: -100px;
+    top: -100px;
 }
 
 .box:hover ol li:nth-child(4) {
-    -webkit-transform: rotateX(90deg) translateZ(200px);
-    width: 200px;
-    height: 200px;
+    -webkit-transform: rotateX(90deg) translateZ(300px);
+    width: 400px;
+    height: 400px;
     opacity: 0.8;
-    left: 0px;
-    top: 0px;
+    left: -100px;
+    top: -100px;
 }
 
 .box:hover ol li:nth-child(5) {
-    -webkit-transform: rotateY(-90deg) translateZ(200px);
-    width: 200px;
-    height: 200px;
+    -webkit-transform: rotateY(-90deg) translateZ(300px);
+    width: 400px;
+    height: 400px;
     opacity: 0.8;
-    left: 0px;
-    top: 0px;
+    left: -100px;
+    top: -100px;
 }
 
 .box:hover ol li:nth-child(6) {
-    -webkit-transform: rotateY(90deg) translateZ(200px);
-    width: 200px;
-    height: 200px;
+    -webkit-transform: rotateY(90deg) translateZ(300px);
+    width: 400px;
+    height: 400px;
     opacity: 0.8;
-    left: 0px;
-    top: 0px;
+    left: -100px;
+    top: -100px;
 }
 
 /* 自动触发效果（展开尺寸200x200） */
 .box.active ol li:nth-child(1) {
-    -webkit-transform: translateZ(200px);
-    width: 200px;
-    height: 200px;
+    -webkit-transform: translateZ(300px);
+    width: 400px;
+    height: 400px;
     opacity: 0.8;
-    left: 0px;
-    top: 0px;
+    left: -100px;
+    top: -100px;
 }
 
 .box.active ol li:nth-child(2) {
-    -webkit-transform: rotateX(180deg) translateZ(200px);
-    width: 200px;
-    height: 200px;
+    -webkit-transform: rotateX(180deg) translateZ(300px);
+    width: 400px;
+    height: 400px;
     opacity: 0.8;
-    left: 0px;
-    top: 0px;
+    left: -100px;
+    top: -100px;
 }
 
 .box.active ol li:nth-child(3) {
-    -webkit-transform: rotateX(-90deg) translateZ(200px);
-    width: 200px;
-    height: 200px;
+    -webkit-transform: rotateX(-90deg) translateZ(300px);
+    width: 400px;
+    height: 400px;
     opacity: 0.8;
-    left: 0px;
-    top: 0px;
+    left: -100px;
+    top: -100px;
 }
 
 .box.active ol li:nth-child(4) {
-    -webkit-transform: rotateX(90deg) translateZ(200px);
-    width: 200px;
-    height: 200px;
+    -webkit-transform: rotateX(90deg) translateZ(300px);
+    width: 400px;
+    height: 400px;
     opacity: 0.8;
-    left: 0px;
-    top: 0px;
+    left: -100px;
+    top: -100px;
 }
 
 .box.active ol li:nth-child(5) {
-    -webkit-transform: rotateY(-90deg) translateZ(200px);
-    width: 200px;
-    height: 200px;
+    -webkit-transform: rotateY(-90deg) translateZ(300px);
+    width: 400px;
+    height: 400px;
     opacity: 0.8;
-    left: 0px;
-    top: 0px;
+    left: -100px;
+    top: -100px;
 }
 
 .box.active ol li:nth-child(6) {
-    -webkit-transform: rotateY(90deg) translateZ(200px);
-    width: 200px;
-    height: 200px;
+    -webkit-transform: rotateY(90deg) translateZ(300px);
+    width: 400px;
+    height: 400px;
     opacity: 0.8;
-    left: 0px;
-    top: 0px;
+    left: -100px;
+    top: -100px;
 }
 
 /* 旋转动画 */
