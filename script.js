@@ -128,7 +128,7 @@ function goToHomePage() {
 
 function handleVerifySubmit() {
     const inputName = verifyInput.value.trim(); 
-    if (inputName === '舒先成') {
+    if (inputName === 'sxc') {
         nameVerifyModal.style.display = 'none';
         goToNewPage();
     } else {
@@ -141,7 +141,7 @@ function handleVerifySubmit() {
 
 function handleRetrySubmit() {
     const inputName = retryInput.value.trim();
-    if (inputName === '舒先成') {
+    if (inputName === 'sxc') {
         nameRetryModal.style.display = 'none';
         goToNewPage();
     } else {
