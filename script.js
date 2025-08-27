@@ -15,7 +15,6 @@ const nameRetryModal = document.getElementById('nameRetryModal');
 const retryInput = document.querySelector('.retry-input');
 const retryBtn = document.querySelector('.button-retry');
 
-// 新增：获取所有返回首页按钮
 const backButtons = document.querySelectorAll('.button-back');
 
 const config = {
@@ -122,7 +121,6 @@ function goToHomePage() {
     state.rejectCount = 0;
     transitionToState('normal');
     startAnimation();
-    // 若首页是当前页面（index.html），直接重置即可；若首页是其他页面，替换为对应URL
     window.location.href = 'index.html';
 }
 
@@ -186,10 +184,10 @@ btnHappy.addEventListener('click', () => {
         transitionToState('normal');
         startAnimation();
     }
-    hideModal(); // 关闭其他弹窗
-    nameVerifyModal.style.display = 'flex'; // 显示弹窗1
+    hideModal();
+    nameVerifyModal.style.display = 'flex';
     verifyInput.value = '';
-    verifyInput.focus(); // 自动聚焦输入框
+    verifyInput.focus();
 });
 
 btnUnhappy.addEventListener('click', () => {
@@ -219,8 +217,8 @@ btnReject.addEventListener('click', () => {
 });
 
 btnAgree.addEventListener('click', () => {
-    hideModal(); // 关闭请求弹窗
-    nameVerifyModal.style.display = 'flex'; // 显示弹窗1
+    hideModal();
+    nameVerifyModal.style.display = 'flex';
     verifyInput.value = '';
     verifyInput.focus();
 });
