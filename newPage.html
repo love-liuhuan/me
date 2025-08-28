@@ -15,7 +15,7 @@
             overflow: hidden;
         }
 
-        .back-home-btn {
+        /* .back-home-btn {
             position: fixed;
             bottom: 40px;
             left: 50%;
@@ -45,34 +45,31 @@
             fill: #ff4757;
             transform: scale(1.1);
             transition: all 0.3s ease;
-        }
+        } */
 
         /* 爱心闪烁发光效果 */
-        .pulse-heart {
+        /* .pulse-heart { */
             /* 基础发光效果 */
-            filter: drop-shadow(0 0 10px rgba(255, 107, 129, 0.8));
+            /* filter: drop-shadow(0 0 10px rgba(255, 107, 129, 0.8)); */
             /* 闪烁动画 */
-            animation: pulse-glow 2s infinite alternate;
-        }
+            /* animation: pulse-glow 2s infinite alternate; */
+        /* } */
 
         /* 定义闪烁动画 */
-        @keyframes pulse-glow {
+        /* @keyframes pulse-glow {
             0% {
-                /* 较弱的发光 */
                 filter: drop-shadow(0 0 5px rgba(255, 107, 129, 0.3));
                 fill: #ff6b81;
             }
             50% {
-                /* 中等强度发光 */
                 filter: drop-shadow(0 0 15px rgba(255, 107, 129, 0.8));
                 fill: #ff5267;
             }
             100% {
-                /* 最强的发光 */
                 filter: drop-shadow(0 0 45px rgba(255, 107, 129, 1));
                 fill: #ff384f;
             }
-        }
+        } */
 
         .container {
             width: 100%;
@@ -96,10 +93,90 @@
             transition: opacity 0.8s ease; /* 渐显渐隐过渡 */
             white-space: nowrap; /* 防止文字换行 */
         }
+
+        /* 计时模块整体样式 */
+        .timer-container {
+            /* background-color: #edb4d0;  */
+            border-radius: 8px;
+            text-align: center;
+            padding: 20px;
+            width: fit-content;
+            /* 改为固定定位，固定在底部 */
+            position: fixed; 
+            bottom: 20px; /* 距离底部的距离，可根据需求调整 */
+            left: 50%; 
+            transform: translateX(-50%); /* 水平居中 */
+            z-index: 9998; /* 保证在合理层级，低于返回按钮等关键元素 */
+        }
+
+        /* 标题样式 */
+        .timer-title {
+            font-size: 18px;
+            color: #ff3366; 
+            margin-bottom: 10px;
+                /* 字体发光效果 */
+            text-shadow: 
+            0 0 5px #ff3366,
+            0 0 20px #ff3366,
+            0 0 30px #ff3366,
+            0 0 40px #ff3366;
+        }
+
+        /* 时间项容器样式 */
+        .timer-box {
+            display: flex;
+            gap: 15px; 
+        }
+
+        /* 每个时间项样式 */
+        .time-item {
+            background-color: #fff; 
+            border-radius: 6px;
+            padding: 10px 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        }
+
+        /* 时间数字样式 */
+        .time-item span {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff3366; 
+            display: block;
+        }
+
+        /* 时间单位样式 */
+        .time-item p {
+            font-size: 14px;
+            color: #999; 
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="love-subtitle" id="loveSubtitle"></div>
+
+    <div class="timer-container">
+        <!-- 2025年 8月25 00:45:09 -->
+        <p class="timer-title">距离我们认识已有：</p>
+        <div class="timer-box">
+            <div class="time-item">
+                <span id="days">0</span>
+                <p>天</p>
+            </div>
+            <div class="time-item">
+                <span id="hours">0</span>
+                <p>时</p>
+            </div>
+            <div class="time-item">
+                <span id="minutes">0</span>
+                <p>分</p>
+            </div>
+            <div class="time-item">
+                <span id="seconds">0</span>
+                <p>秒</p>
+            </div>
+        </div>
+  </div>
 
     <div class="m-main">
 		<div class="player">
@@ -581,9 +658,7 @@
                 "但是，我尊重你的决定",
                 "因为正常来说，不太熟悉",
                 "见面确实没有安全感",
-                "就算很想见你，我也会适当的克制",
-                "但是，我还是想早日见见手机对面的那个她",
-                "前提是，还是要一定的了解",
+                "但是，我还是想早日见见手机对面的你",
                 "27号晚上我开了个玩笑",
                 "惹你生气了，对不起",
                 "小的错了，绝无下次",
@@ -623,18 +698,21 @@
             // 3. 页面加载完成后，先延迟1秒显示第一句（给3D相册加载时间）
             setTimeout(showNextText, 1000);
 
-            const backHomeBtn = document.getElementById('backHomeBtn');
-            backHomeBtn.addEventListener('click', function () {
-            window.location.href = 'index.html'; // 跳转至首页
-    });
+            // //返回按钮
+            // const backHomeBtn = document.getElementById('backHomeBtn');
+            // backHomeBtn.addEventListener('click', function () {
+            // window.location.href = 'index.html'; // 跳转至首页
+            // });
         });
     </script>
     <!-- SVG 爱心按钮 -->
-    <button class="back-home-btn" id="backHomeBtn">
+    <!-- <button class="back-home-btn" id="backHomeBtn">
         <svg class="pulse-heart" width="200" height="190" viewBox="0 0 24 24" fill="#ff6b81">
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
         <span>返回</span>
-    </button>
+    </button> -->
+
+     <script src="time.js"></script> 
 </body>
 </html>
