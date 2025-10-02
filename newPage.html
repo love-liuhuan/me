@@ -72,11 +72,21 @@
         } */
 
         .container {
+            /* width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #000000; */
+            position: fixed; /* 固定定位，相对于视口全屏 */
+            top: 0;          /* 顶部对齐 */
+            left: 0;         /* 左侧对齐 */
             width: 100%;
             height: 100%;
             margin: 0;
             padding: 0;
             background-color: #000000;
+            z-index: 1; /* 可选：设置层级，确保在底层（不遮挡其他交互元素） */
+            
         }
 
         .love-subtitle {
@@ -130,7 +140,7 @@
 
         /* 每个时间项样式 */
         .time-item {
-            background-color: #ffffff; 
+            background-color: #fff; 
             border-radius: 6px;
             padding: 10px 15px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
@@ -198,8 +208,8 @@
 		</div>
 		<div class="video">
 			<audio name="media" id="js-video">
-  <source src="./mp3/forya.MP3" type="audio/mpeg">
-</audio>
+                <source src="./mp3/forya.MP3" type="audio/mpeg">
+            </audio>
 		</div>
 	</div>
     <div id="jsi-cherry-container" class="container">
@@ -617,12 +627,12 @@
             const loveTexts = [
                 "...",
                 "七夕节快乐！🥰🥰🥰🥰🥰🥰🥰",
-				"愿你",
+				"愿刘欢妹妹",
 				"身体健康",
-				"天天开心",
 				"工作顺利",
 				"越来越漂亮",
-                "在soul动态上看到了你",
+				"越来越可爱",
+                "在soul动态上见到你的时候，觉得挺有意思！",
                 "想着去聊聊看吧！",
                 "于是我就发起了私信，还做了自我介绍",
                 "没想到你还回复了",
@@ -632,17 +642,20 @@
                 "微信里，你说自己是一个大大咧咧的女孩子",
                 "还有一点小脾气",
                 "可是这样的性子我挺喜欢的",
+                "在我说出自己的不自信时，你还会鼓励我",
+                "妈呀，突然感觉你与别的女生不一样",
+                "我开始有点喜欢(好感)了😊",
                 "有时候聊着聊着你就不在线了",
-				"我总是会多想",
                 "你说是我太敏感了",
-                "哈哈",
+                "哈哈，也是哦",
                 "你说我这个人不怎么开玩笑",
                 "但是在刚认识的时候，我觉得还不够了解",
                 "所以不敢随便开玩笑",
-				"呀呀呀",
                 "27号晚上我开了个玩笑",
                 "惹你生气了，对不起",
                 "小的错了，绝无下次",
+                "网上都说理科生不懂什么浪漫，确实感觉有点哈",
+                "但是我会以我的方式呈现出来",
                 "这个网页的制作耗时3天",
                 "小部分效果动画来源网络，不要介意哈",
                 "希望你能够喜欢",
