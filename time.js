@@ -1,5 +1,6 @@
-// 设定认识的时间，月份从 0 开始，所以 8 月对应 7 
-const meetTime = new Date(2025, 7, 25, 0, 45, 9); 
+const meetTime = new Date(2025, 7, 17, 8, 16, 9); // 认识于 2025年8月17日08:16:09
+// const meetTime = new Date(2025, 8, 29, 9, 40, 9); // 在一起于 2025年9月29日09:40:09
+
 
 function updateTimer() {
   const now = new Date();
